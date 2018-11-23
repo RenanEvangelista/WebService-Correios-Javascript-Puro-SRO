@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Rastreio</title>
+    <script type="text/javascript">
+        function soap() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('POST', 'https://apphom.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente', true);
+            var Rastro =
+            '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">'+
+                '<soapenv:Header/>'+
+                '<soapenv:Body>'+
+                   '<cli:consultaSRO>'+
+                      '<listaObjetos>PM095764068BR</listaObjetos>'+
+                      '<tipoConsulta>L</tipoConsulta>'+
+                      '<tipoResultado>T</tipoResultado>'+
+                      '<usuarioSro>ECT</usuarioSro>'+
+                      '<senhaSro>SRO</senhaSro>'+
+                   '</cli:consultaSRO>'+
+                '</soapenv:Body>'+
+             '</soapenv:Envelope>';
+     
+     
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4) {
+                    if (xmlhttp.status == 200) {
+                        alert('Concluido com sucesso!');
+                        alert(xmlhttp.response);
+			console.log(xmlhttp.response);
+                    }
+                }
+            };
+            
+            xmlhttp.send(Rastro);
+            alert("enviou");
+        }
+    </script>
+</head>
+<body>
+
+ 
+    <form name="buscaEventos" action="buscaEventos" method="post">
+        <div>
+            <input type="button" value="Soap" onclick="soap();" />
+        </div>
+    </form>
+
+ <div>
+  <p id="response">xml</p>
+ </div>
+
+</body>
+</html>
